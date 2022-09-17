@@ -1,5 +1,6 @@
 package br.com.advinha.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.advinha.model.Foto;
+import br.com.advinha.repository.FotoRepository;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
@@ -27,46 +30,43 @@ public class FotoController {
 
 	@Autowired
 	private FotoRepository fotoRepository;
-	
+
 	@GetMapping
-	public ResponseEntity<Foto> getAll(){
+	public ResponseEntity<List<Foto>> getAll() {
 		return ResponseEntity.ok(fotoRepository.findAll());
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Foto> getById(@PathVariable Long id){
-		return postagemRepository.findById(id)
-				.map(resposta -> ResponseEntity.ok(resposta))
+	public ResponseEntity<Foto> getById(@PathVariable Long id) {
+		return fotoRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-	
+
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Foto>> getByNome(@PathVariable String nome){
-		return ResponseEntity.ok(fotoRepository.findAllByNomeContainingIgnoreCase(nome));
+	public ResponseEntity<List<Foto>> getByNome(@PathVariable String nome) {
+		return ResponseEntity.ok(fotoRepository.findAllByNomeContainignIgnoreCase(nome));
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Foto> post(@Valid @RequestBody Foto foto){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(fotoRepository.save(foto));
+	public ResponseEntity<Foto> post(@Valid @RequestBody Foto foto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(fotoRepository.save(foto));
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Foto> put(@Valid @RequestBody Foto foto){
+	public ResponseEntity<Foto> put(@Valid @RequestBody Foto foto) {
 		return fotoRepository.findById(foto.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK)
-						.body(fotoRepository.save(foto)))
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(fotoRepository.save(foto)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
-	
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		Optional<Foto> foto = fotoRepository.findById(id);
-		
-		if(foto.isEmpty())
+
+		if (foto.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		
+
 		fotoRepository.deleteById(id);
 	}
 }

@@ -17,20 +17,43 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "O atributo nome é obrigatório!")
 	@Size(min = 2, max = 200)
 	private String nome;
-	
-	//CascadeType.ALL se remove a categoria remove todas as fotos
-	//CascadeType.REMOVE 
-	@OneToMany(mappedBy = "categoria",cascade = CascadeType.ALL)
+
+	// CascadeType.ALL se remove a categoria remove todas as fotos
+	// CascadeType.REMOVE
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("categoria")
 	private List<Foto> foto;
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public List<Foto> getFoto() {
+		return foto;
+	}
+
+	public void setFoto(List<Foto> foto) {
+		this.foto = foto;
+	}
 
 }
