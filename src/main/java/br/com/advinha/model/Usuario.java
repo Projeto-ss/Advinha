@@ -14,8 +14,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.criterion.Example;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,7 +43,7 @@ public class Usuario {
 	private String fotoUsuario;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usurio")
+	@JsonIgnoreProperties("usuario")
 	private List<Foto> foto;
 
 	public Usuario(Long id, String nick, String usuario,String senha, String fotoUsuario) {
@@ -71,7 +69,7 @@ public class Usuario {
 		return nick;
 	}
 
-	public void setNome(String nick) {
+	public void setNick(String nick) {
 		this.nick = nick;
 	}
 
