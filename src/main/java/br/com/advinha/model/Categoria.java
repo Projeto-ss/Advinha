@@ -10,19 +10,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table
+@Table (name = "tb_categoria")
 public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "O atributo nome é obrigatório!")
 	@Size(min = 2, max = 200)
 	private String nome;
 
@@ -47,13 +47,13 @@ public class Categoria {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public List<Foto> getFoto() {
-		return foto;
-	}
-
-	public void setFoto(List<Foto> foto) {
-		this.foto = foto;
-	}
+//
+//	public List<Foto> getFoto() {
+//		return foto;
+//	}
+//
+//	public void setFoto(List<Foto> foto) {
+//		this.foto = foto;
+//	}
 
 }
