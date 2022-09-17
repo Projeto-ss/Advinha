@@ -11,5 +11,5 @@ import br.com.advinha.model.Foto;
 @Repository
 public interface FotoRepository extends JpaRepository<Foto, Long> {
 
-	public List<Foto> findAllByNomeContainignIgnoreCase(@Param("nome")String nome);
+	public List<Foto> findAllByNomeContainingIgnoreCase(@Param("nome")String nome);
 }

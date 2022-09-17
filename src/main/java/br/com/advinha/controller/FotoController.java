@@ -20,10 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.advinha.model.Foto;
-<<<<<<< HEAD
 import br.com.advinha.repository.FotoRepository;
-=======
->>>>>>> 7b1e6807d3e7ecb7b8d3642d112cd12bbf0c836c
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
@@ -40,20 +37,15 @@ public class FotoController {
 	}
 
 	@GetMapping("/{id}")
-<<<<<<< HEAD
-	public ResponseEntity<Foto> getById(@PathVariable Long id) {
-		return fotoRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
-=======
 	public ResponseEntity<Foto> getById(@PathVariable Long id){
 		return fotoRepository.findById(id)
 				.map(resposta -> ResponseEntity.ok(resposta))
->>>>>>> 7b1e6807d3e7ecb7b8d3642d112cd12bbf0c836c
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Foto>> getByNome(@PathVariable String nome) {
-		return ResponseEntity.ok(fotoRepository.findAllByNomeContainignIgnoreCase(nome));
+		return ResponseEntity.ok(fotoRepository.findAllByNomeContainingIgnoreCase(nome));
 	}
 
 	@PostMapping

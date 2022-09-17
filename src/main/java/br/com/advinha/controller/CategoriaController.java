@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import br.com.advinha.model.Categoria;
+import br.com.advinha.repository.CategoriaRepository;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
@@ -44,7 +46,7 @@ public class CategoriaController {
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Categoria>> getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(categoriaRepository.findAllByNomeContainingIgnoreCase(nome));
-	}
+			}
 	
 	@PostMapping
 	public ResponseEntity<Categoria> post(@Valid @RequestBody Categoria categoria){
