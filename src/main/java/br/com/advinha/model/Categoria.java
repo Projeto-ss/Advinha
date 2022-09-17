@@ -15,7 +15,9 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//Informa que a classe é uma entidade
 @Entity
+//Criação da tabela
 @Table (name = "tb_categoria")
 public class Categoria {
 

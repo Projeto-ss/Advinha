@@ -29,6 +29,7 @@ import br.com.advinha.repository.FotoRepository;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FotoController {
 
+	
 	@Autowired
 	private FotoRepository fotoRepository;
 
