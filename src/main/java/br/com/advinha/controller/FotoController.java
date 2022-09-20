@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.advinha.model.Foto;
+import br.com.advinha.model.Imagem;
 import br.com.advinha.repository.FotoRepository;
 
 
@@ -34,40 +34,40 @@ public class FotoController {
 	private FotoRepository fotoRepository;
 
 	@GetMapping
-	public ResponseEntity<List<Foto>> getAll() {
+	public ResponseEntity<List<Imagem>> getAll() {
 		return ResponseEntity.ok(fotoRepository.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Foto> getById(@PathVariable Long id){
+	public ResponseEntity<Imagem> getById(@PathVariable Long id){
 		return fotoRepository.findById(id)
 				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Foto>> getByNome(@PathVariable String nome) {
+	public ResponseEntity<List<Imagem>> getByNome(@PathVariable String nome) {
 		return ResponseEntity.ok(fotoRepository.findAllByNomeContainingIgnoreCase(nome));
 	}
 
 	@PostMapping
-	public ResponseEntity<Foto> post(@Valid @RequestBody Foto foto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(fotoRepository.save(foto));
+	public ResponseEntity<Imagem> post(@Valid @RequestBody Imagem imagem) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(fotoRepository.save(imagem));
 	}
 
 	@PutMapping
-	public ResponseEntity<Foto> put(@Valid @RequestBody Foto foto) {
-		return fotoRepository.findById(foto.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(fotoRepository.save(foto)))
+	public ResponseEntity<Imagem> put(@Valid @RequestBody Imagem imagem) {
+		return fotoRepository.findById(imagem.getId())
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(fotoRepository.save(imagem)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		Optional<Foto> foto = fotoRepository.findById(id);
+		Optional<Imagem> imagem = fotoRepository.findById(id);
 
-		if (foto.isEmpty())
+		if (imagem.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
 		fotoRepository.deleteById(id);

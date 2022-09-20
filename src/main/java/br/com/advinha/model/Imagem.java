@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "tb_foto")
-public class Foto {
+public class Imagem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,10 @@ public class Foto {
 	@ManyToOne 
 	@JsonIgnoreProperties
 	private Categoria categoria;
+	
+	@ManyToOne
+	@JsonIgnoreProperties
+	private Usuario usuario;
 	
 
 	public Categoria getCategoria() {
@@ -65,4 +69,13 @@ public class Foto {
 		this.foto = foto;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
 }

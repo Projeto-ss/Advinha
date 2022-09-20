@@ -27,7 +27,6 @@ public class Usuario {
 	private Long id;
 	
 	@NotNull(message = "O atributo Nome é obrigatório!")
-	@Size (min =2, max=13)
 	private String nick;
 	
 	@Schema (example = "email@email.com")
@@ -44,7 +43,7 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List<Foto> foto;
+	private List<Imagem> imagem;
 
 	public Usuario(Long id, String nick, String usuario,String senha, String fotoUsuario) {
 		this.id = id;
@@ -54,8 +53,7 @@ public class Usuario {
 		this.fotoUsuario = fotoUsuario;
 	}
 
-	public Usuario() {
-	}
+	public Usuario() { }
 
 	public Long getId() {
 		return id;
@@ -97,12 +95,12 @@ public class Usuario {
 		this.fotoUsuario = fotoUsuario;
 	}
 
-	public List<Foto> getFoto() {
-		return foto;
+	public List<Imagem> getImagem() {
+		return imagem;
 	}
 
-	public void setFoto(List<Foto> foto) {
-		this.foto = foto;
+	public void setImagem(List<Imagem> imagem) {
+		this.imagem = imagem;
 	}
 	
 			
