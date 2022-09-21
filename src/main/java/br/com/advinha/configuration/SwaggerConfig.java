@@ -30,7 +30,7 @@ public class SwaggerConfig {
 						.email("projetodosprojetos1@gmail.com")))
 				.externalDocs(new ExternalDocumentation()
 						.description("Repository")
-						.url("https://github.com/pereiracaslu/Advinha"));
+						.url("https://github.com/Projeto-ss/Advinha"));
 	}
 	
 	@Bean
